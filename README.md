@@ -1,78 +1,49 @@
 # SQL
 
-SQL (Structured Query Language) is the backbone of data management in relational databases. It's not just a skill; it's a foundational language for anyone interacting with data, be it a backend developer building robust applications, a data scientist extracting insights, a data analyst creating reports, or a system designer architecting scalable data solutions. Mastery of SQL is indispensable for job interviews in these fields and for thriving in real-world database development.
-This comprehensive guide will take you from the absolute basics of SQL to its most advanced features, equipping you with the knowledge and practical examples needed for true mastery. We'll cover syntax, best practices, common pitfalls, and touch upon differences across popular RDBMS platforms like MySQL, PostgreSQL, and SQL Server.
-What is SQL and its Role?
-At its core, SQL is a domain-specific language used to manage data held in a relational database management system (RDBMS) or for stream processing in a relational data stream management system (RDSMS). It's the standard language for:
- * Querying data: Retrieving specific information from a database.
- * Manipulating data: Inserting new records, updating existing ones, and deleting obsolete data.
- * Defining data: Creating and modifying the structure of databases and tables.
- * Controlling data access: Managing user permissions and security.
-Why is SQL Foundational?
- * Backend Development: Web and mobile applications heavily rely on databases to store user data, product information, transactional details, etc. Backend developers use SQL (often via ORMs or direct JDBC/ODBC connections) to interact with these databases.
- * Data Science & Analytics: Data scientists and analysts use SQL to extract, clean, transform, and aggregate data for analysis, machine learning model training, and reporting. It's often the first step in any data-driven project.
- * System Design: Architects and system designers need to understand SQL to design efficient database schemas, optimize queries, and ensure data integrity and scalability for large-scale systems.
-🧱 1. Database and Table Fundamentals
-What is a database and RDBMS?
-A database is an organized collection of structured information, or data, typically stored electronically in a computer system. It's designed for efficient storage, retrieval, and management of data.
-A Relational Database Management System (RDBMS) is a software system used to create, manage, and query relational databases. In an RDBMS, data is organized into tables, which consist of rows and columns. These tables are related to each other based on common fields.
-Examples of RDBMS: MySQL, PostgreSQL, Oracle, SQL Server, SQLite.
-Creating, Dropping, and Using Databases
-CREATE DATABASE
-Used to create a new database.
-Syntax:
-CREATE DATABASE database_name;
+## What is SQL and its Role?
+SQL is a domain-specific language used to manage data held in a relational database management system (RDBMS) or for stream processing in a relational data stream management system (RDSMS). It's the standard language for:
+ * **Querying data**: Retrieving specific information from a database.
+ * **Manipulating data**: Inserting new records, updating existing ones, and deleting obsolete data.
+ * **Defining data**: Creating and modifying the structure of databases and tables.
+ * **Controlling data access**: Managing user permissions and security.
 
-Example:
-CREATE DATABASE bookstore_db;
 
-DROP DATABASE
-Used to delete an existing database. Use with extreme caution! This operation is irreversible.
-Syntax:
-DROP DATABASE database_name;
+## Database and Table Fundamentals
+### What is a database and RDBMS?
+A **database** is an organized collection of structured information, or data, typically stored electronically in a computer system. It's designed for efficient storage, retrieval, and management of data.
 
-Example:
-DROP DATABASE old_project_db;
+A **Relational Database Management System (RDBMS)** is a software system used to create, manage, and query relational databases. 
 
-USE
-Used to select a database to work with. Once selected, subsequent SQL commands will operate within that database until another USE command is issued or the session ends.
-Syntax:
-USE database_name;
+In an RDBMS, data is organized into tables, which consist of rows and columns. These tables are related to each other based on common fields.
 
-Example:
-USE bookstore_db;
+**Examples of RDBMS**: MySQL, PostgreSQL, Oracle, SQL Server, SQLite.
 
-Data Types
+### Creating, Dropping, and Using Databases
+- `CREATE DATABASE database_name;` Used to create a new database.
+- `DROP DATABASE database_name;` Used to delete an existing database. Use with extreme caution! This operation is irreversible.
+- `USE database_name;`Used to select a database to work with. Once selected, subsequent SQL commands will operate within that database until another USE command is issued or the session ends.
+
+### Data Types
 Data types define the kind of values a column can hold. Choosing appropriate data types is crucial for data integrity, storage efficiency, and query performance.
- * INT / INTEGER: Whole numbers (e.g., 1, 100, -5).
-   * MySQL: INT, TINYINT, SMALLINT, MEDIUMINT, BIGINT (vary by storage size).
-   * PostgreSQL: INTEGER, SMALLINT, BIGINT.
-   * SQL Server: INT, TINYINT, SMALLINT, BIGINT.
- * VARCHAR(n): Variable-length string, where n is the maximum number of characters (e.g., 'Hello World'). VARCHAR is preferred over CHAR for variable-length text to save space.
- * DECIMAL(p, s) / NUMERIC(p, s): Fixed-point numbers, p is the total number of digits (precision), s is the number of digits after the decimal point (scale) (e.g., 123.45, 9.99). Suitable for monetary values.
- * DATE: Stores a date in 'YYYY-MM-DD' format.
- * TIME: Stores a time in 'HH:MM:SS' format.
- * DATETIME / TIMESTAMP: Stores both date and time. TIMESTAMP often has a smaller range and is commonly used for tracking changes (e.g., last updated). DATETIME typically has a larger range.
-   * MySQL: DATETIME, TIMESTAMP.
-   * PostgreSQL: TIMESTAMP, TIMESTAMPTZ (with timezone).
-   * SQL Server: DATETIME, DATETIME2, SMALLDATETIME.
- * BOOLEAN / TINYINT(1) (MySQL): Stores true/false values. PostgreSQL has a native BOOLEAN type. MySQL often uses TINYINT(1) where 1 represents true and 0 represents false. SQL Server uses BIT.
- * TEXT / BLOB: For large blocks of text (TEXT) or binary data (BLOB for images, files).
- * FLOAT / DOUBLE: Floating-point numbers for approximate decimal values. Less precise than DECIMAL.
-Creating, Altering, and Dropping Tables
-CREATE TABLE
-Used to define a new table in the current database.
-Syntax:
-CREATE TABLE table_name (
-    column1_name data_type [constraints],
-    column2_name data_type [constraints],
-    ...
-    [table_constraints]
-);
+ * `INT / INTEGER`: Whole numbers (e.g., 1, 100, -5).
+   * **MySQL**: `INT`, `TINYINT`, `SMALLINT`, `MEDIUMINT`, `BIGINT` (vary by storage size).
+   * **PostgreSQL**: `INTEGER`, `SMALLINT`, `BIGINT`.
+   * **SQL Server**: `INT`, `TINYINT`, `SMALLINT`, `BIGINT`.
+ * `VARCHAR(n)`: Variable-length string, where n is the maximum number of characters (e.g., 'Hello World'). VARCHAR is preferred over CHAR for variable-length text to save space.
+ * `DECIMAL(p, s)` / `NUMERIC(p, s)`: Fixed-point numbers, p is the total number of digits (precision), s is the number of digits after the decimal point (scale) (e.g., 123.45, 9.99). Suitable for monetary values.
+ * `DATE`: Stores a date in 'YYYY-MM-DD' format.
+ * `TIME`: Stores a time in 'HH:MM:SS' format.
+ * `DATETIME` / `TIMESTAMP`: Stores both date and time. `TIMESTAMP` often has a smaller range and is commonly used for tracking changes (e.g., last updated). `DATETIME` typically has a larger range.
+   * **MySQL**: `DATETIME`, `TIMESTAMP`.
+   * **PostgreSQL**: `TIMESTAMP`, `TIMESTAMPTZ` (with timezone).
+   * **SQL Server**: `DATETIME`, `DATETIME2`, `SMALLDATETIME`.
+ * `BOOLEAN` / `TINYINT(1)` **(MySQL)**: Stores true/false values. PostgreSQL has a native BOOLEAN type. MySQL often uses `TINYINT(1)` where 1 represents true and 0 represents false. SQL Server uses BIT.
+ * `TEXT` / `BLOB`: For large blocks of text (`TEXT`) or binary data (`BLOB` for images, files).
+ * `FLOAT` / `DOUBLE`: Floating-point numbers for approximate decimal values. Less precise than `DECIMAL`.
 
-Example:
-USE bookstore_db;
-
+### Creating, Altering, and Dropping Tables
+`CREATE TABLE` Used to define a new table in the current database.
+```sql
 CREATE TABLE Authors (
     author_id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(100) NOT NULL,
@@ -90,88 +61,91 @@ CREATE TABLE Books (
     stock_quantity INT DEFAULT 0,
     FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
+```
 
-ALTER TABLE
-Used to modify the structure of an existing table.
-Syntax (Add Column):
+`ALTER TABLE` Used to modify the structure of an existing table.
+```sql
+# Syntax (Add Column):
 ALTER TABLE table_name
 ADD COLUMN new_column_name data_type [constraints];
 
-Syntax (Drop Column):
+# Syntax (Drop Column):
 ALTER TABLE table_name
 DROP COLUMN column_name;
 
-Syntax (Modify Column):
+# Syntax (Modify Column):
 -- MySQL
 ALTER TABLE table_name
 MODIFY COLUMN column_name new_data_type [new_constraints];
 
--- PostgreSQL
+# PostgreSQL
 ALTER TABLE table_name
 ALTER COLUMN column_name TYPE new_data_type;
 
--- SQL Server
+# SQL Server
 ALTER TABLE table_name
 ALTER COLUMN column_name new_data_type;
 
-Example:
+# Example:
 ALTER TABLE Books
 ADD COLUMN isbn VARCHAR(13) UNIQUE;
 
 ALTER TABLE Authors
 DROP COLUMN nationality;
 
--- MySQL example for modifying column
+# MySQL example for modifying column
 ALTER TABLE Books
 MODIFY COLUMN stock_quantity INT DEFAULT 10;
+```
 
-DROP TABLE
-Used to delete an existing table. Use with extreme caution! This deletes the table structure and all its data.
-Syntax:
-DROP TABLE table_name;
-
+`DROP TABLE` Used to delete an existing table. Use with extreme caution! This deletes the table structure and all its data.
+```sql
 Example:
 DROP TABLE old_temp_data;
+```
 
-Setting PRIMARY KEY, AUTO_INCREMENT, and DEFAULT Values
- * PRIMARY KEY: A column (or set of columns) that uniquely identifies each row in a table.
-   * Rules: Must contain unique values, cannot contain NULL values.
-   * A table can have only one PRIMARY KEY.
+### Setting PRIMARY KEY, AUTO_INCREMENT, and DEFAULT Values
+ * `PRIMARY KEY`: A column (or set of columns) that uniquely identifies each row in a table.
+   * **Rules**: Must contain unique values, cannot contain NULL values.
+   * A table can have **only one** `PRIMARY KEY`.
    * Automatically creates a clustered index in some RDBMS (e.g., SQL Server) or a B-tree index (e.g., MySQL, PostgreSQL).
- * AUTO_INCREMENT (MySQL) / SERIAL (PostgreSQL) / IDENTITY (SQL Server): Automatically generates a unique number for new records. Useful for primary keys.
-   * MySQL: INT PRIMARY KEY AUTO_INCREMENT
-   * PostgreSQL: SERIAL or BIGSERIAL (for BIGINT)
-   * SQL Server: IDENTITY(seed, increment)
- * DEFAULT value: Specifies a default value for a column when no value is explicitly provided during INSERT.
-Example (revisiting CREATE TABLE):
-CREATE TABLE Products (
-    product_id INT PRIMARY KEY AUTO_INCREMENT, -- MySQL syntax for auto-incrementing PK
-    product_name VARCHAR(255) NOT NULL,
-    price DECIMAL(10, 2) DEFAULT 0.00,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Sets default to current time
-);
+ * `AUTO_INCREMENT` (MySQL) / `SERIAL` (PostgreSQL) / `IDENTITY` (SQL Server): Automatically generates a unique number for new records. Useful for primary keys.
+   * **MySQL**: `INT PRIMARY KEY AUTO_INCREMENT`
+   * **PostgreSQL**: `SERIAL or BIGSERIAL (for BIGINT)`
+   * **SQL Server**: `IDENTITY(seed, increment)`
+ * `DEFAULT` value: Specifies a default value for a column when no value is explicitly provided during `INSERT`.
+    ```sql
+    CREATE TABLE Products (
+        product_id INT PRIMARY KEY AUTO_INCREMENT, -- MySQL syntax for auto-incrementing PK
+        product_name VARCHAR(255) NOT NULL,
+        price DECIMAL(10, 2) DEFAULT 0.00,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Sets default to current time
+    );
 
--- PostgreSQL equivalent for product_id:
--- product_id SERIAL PRIMARY KEY,
+    -- PostgreSQL equivalent for product_id:
+    -- product_id SERIAL PRIMARY KEY,
+   ```
 
-Understanding NULL vs NOT NULL
- * NULL: Represents the absence of a value. It is not equivalent to 0 or an empty string. A column can contain NULL values by default.
- * NOT NULL: A constraint that ensures a column cannot have NULL values. If you try to insert or update a row with a NULL value in a NOT NULL column, the operation will fail.
-Practical Scenario:
-In an Authors table, first_name and last_name should be NOT NULL because an author must have a name. birth_date might be NULL if the birth date is unknown.
-📝 2. Inserting and Managing Data
-INSERT INTO (Single & Batch Inserts)
-Used to add new rows of data into a table.
+### Understanding NULL vs NOT NULL
+ * **NULL**: Represents the absence of a value. It is not equivalent to 0 or an empty string. A column can contain NULL values by default.
+ * **NOT NULL**: A constraint that ensures a column cannot have NULL values. If you try to insert or update a row with a NULL value in a NOT NULL column, the operation will fail.
+
+---
+
+## Inserting and Managing Data
+`INSERT INTO` (Single & Batch Inserts) Used to add new rows of data into a table.
 Single Row Insert
-Syntax:
+```sql
 INSERT INTO table_name (column1, column2, ...)
 VALUES (value1, value2, ...);
 
 -- Or, if inserting values for all columns in order:
 INSERT INTO table_name
 VALUES (value1, value2, ...);
+```
 
-Example:
+**Example**:
+```sql
 USE bookstore_db;
 
 INSERT INTO Authors (first_name, last_name, birth_date)
@@ -179,17 +153,20 @@ VALUES ('Stephen', 'King', '1947-09-21');
 
 INSERT INTO Books (title, author_id, publication_year, price)
 VALUES ('The Shining', 1, 1977, 15.99); -- Assuming Stephen King's author_id is 1
+```
 
-Batch Inserts (Multiple Rows)
+**Batch Inserts (Multiple Rows)** :
 More efficient for inserting many rows at once, as it reduces network round trips.
-Syntax:
+```sql
 INSERT INTO table_name (column1, column2, ...)
 VALUES
     (value1_row1, value2_row1, ...),
     (value1_row2, value2_row2, ...),
     ...;
+```
 
-Example:
+**Example**:
+```sql
 INSERT INTO Authors (first_name, last_name)
 VALUES
     ('Agatha', 'Christie'),
@@ -201,14 +178,15 @@ VALUES
     ('Murder on the Orient Express', 2, 1934, 12.50),
     ('Harry Potter and the Sorcerer''s Stone', 3, 1997, 18.75),
     ('1984', 4, 1949, 10.00);
+```
 
-SELECT, Column Aliases, and Result Formatting
-SELECT
-Used to retrieve data from one or more tables.
-Syntax:
+### `SELECT`, Column Aliases, and Result Formatting
+`SELECT` Used to retrieve data from one or more tables.
+```sql
 SELECT column1, column2, ...
 FROM table_name;
-
+```
+```
 -- To select all columns:
 SELECT *
 FROM table_name;
@@ -219,72 +197,72 @@ FROM Books;
 
 SELECT *
 FROM Authors;
+```
 
-Column Aliases (AS)
-Used to give a temporary, more readable name to a column or expression in the result set.
-Syntax:
+**Column Aliases (AS)** : Used to give a temporary, more readable name to a column or expression in the result set.
+```sql
 SELECT column_name AS alias_name
 FROM table_name;
 
 Example:
 SELECT title AS BookTitle, publication_year AS YearPublished
 FROM Books;
+```
 
-Result Formatting (Implicit)
+**Result Formatting (Implicit)** :
 SQL results are typically returned as a tabular dataset. Further formatting (e.g., date formats, currency symbols) usually happens in the application layer, though some SQL functions can assist (see String and Date functions later).
-Use of Quotes, Escaping Characters
- * Single Quotes ('): Used to enclose string literals (e.g., 'text', '2023-01-01').
- * Backticks (`): (MySQL specific) Used to quote identifiers (database names, table names, column names) if they contain special characters or are reserved keywords.
-   * PostgreSQL/SQL Server: Use double quotes (") for identifiers. It's generally good practice to avoid reserved keywords and special characters in names to prevent quoting.
-Escaping Characters:
-If a single quote is part of a string literal, it needs to be escaped. The standard way is to double the single quote.
-Example:
-INSERT INTO Books (title, author_id, publication_year, price)
-VALUES ('The Hitchhiker''s Guide to the Galaxy', 1, 1979, 9.99); -- 's becomes ''s
 
-Handling Special Characters in MySQL
-MySQL, by default, handles most common characters. For specific binary data or very complex character sets, you might need to specify character encodings (e.g., UTF8MB4) at the database or table level. When inserting, generally follow the standard quoting and escaping rules.
-Constraints: UNIQUE, CHECK, NOT NULL, Named Constraints
+### Use of Quotes, Escaping Characters
+ * **Single Quotes** ('): Used to enclose string literals (e.g., 'text', '2023-01-01').
+ * **Backticks** (`): (MySQL specific) Used to quote identifiers (database names, table names, column names) if they contain special characters or are reserved keywords.
+   * **PostgreSQL/SQL Server**: Use double quotes (") for identifiers. It's generally good practice to avoid reserved keywords and special characters in names to prevent quoting.
+ * **Escaping Characters**: If a single quote is part of a string literal, it needs to be escaped. The standard way is to double the single quote.
+    ```sql
+    INSERT INTO Books (title, author_id, publication_year, price)
+    VALUES ('The Hitchhiker''s Guide to the Galaxy', 1, 1979, 9.99); -- 's becomes ''s
+    ```
+   
+### Constraints: `UNIQUE`, `CHECK`, `NOT NULL`, Named Constraints
 Constraints enforce rules on data in a table, ensuring data integrity.
- * NOT NULL: (Already covered) Ensures a column cannot contain NULL values.
- * UNIQUE: Ensures all values in a column (or set of columns) are unique across all rows. A table can have multiple UNIQUE constraints.
-   * Unlike PRIMARY KEY, a UNIQUE column can typically contain NULL values, but only one NULL (as NULL is not considered equal to NULL).
- * CHECK: Defines a rule that values in a column must satisfy.
-   * MySQL: CHECK constraints are parsed but not enforced in older versions (before 8.0.16). They are enforced in newer versions.
-   * PostgreSQL/SQL Server: Fully enforced.
- * Named Constraints: Giving a name to a constraint makes it easier to manage (e.g., drop or alter) later.
-Syntax (with CREATE TABLE):
-CREATE TABLE Users (
-    user_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE, -- UNIQUE constraint
-    email VARCHAR(100) NOT NULL,
-    age INT,
-    CONSTRAINT chk_age CHECK (age >= 18), -- Named CHECK constraint
-    CONSTRAINT uq_email UNIQUE (email) -- Named UNIQUE constraint
-);
+ * `NOT NULL`: (Already covered) Ensures a column cannot contain `NULL` values.
+ * `UNIQUE`: Ensures all values in a column (or set of columns) are unique across all rows. A table can have multiple `UNIQUE` constraints.
+   * Unlike `PRIMARY KEY`, a `UNIQUE` column can typically contain NULL values, but only one `NULL` (as `NULL` is not considered equal to `NULL`).
+ * `CHECK`: Defines a rule that values in a column must satisfy.
+   * **MySQL**: `CHECK` constraints are parsed but not enforced in older versions (before 8.0.16). They are enforced in newer versions.
+   * **PostgreSQL/SQL Server**: Fully enforced.
+ * **Named Constraints**: Giving a name to a constraint makes it easier to manage (e.g., drop or alter) later.
+    ```sql
+    CREATE TABLE Users (
+        user_id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(50) NOT NULL UNIQUE, -- UNIQUE constraint
+        email VARCHAR(100) NOT NULL,
+        age INT,
+        CONSTRAINT chk_age CHECK (age >= 18), -- Named CHECK constraint
+        CONSTRAINT uq_email UNIQUE (email) -- Named UNIQUE constraint
+    );
+    
+    Syntax (with ALTER TABLE):
+    ALTER TABLE Products
+    ADD CONSTRAINT chk_price CHECK (price > 0);
+    
+    ALTER TABLE Customers
+    ADD CONSTRAINT uq_customer_email UNIQUE (email);
+    ```
 
-Syntax (with ALTER TABLE):
-ALTER TABLE Products
-ADD CONSTRAINT chk_price CHECK (price > 0);
+---
 
-ALTER TABLE Customers
-ADD CONSTRAINT uq_customer_email UNIQUE (email);
+## CRUD Operations
+`CRUD` stands for **Create**, **Read**, **Update**, **Delete** – the four basic functions of persistent storage. <br>
+Reading Data with `SELECT`, `WHERE`, `LIKE`, **Wildcards**
 
-🔄 3. CRUD Operations
-CRUD stands for Create, Read, Update, Delete – the four basic functions of persistent storage.
-Reading Data with SELECT, WHERE, LIKE, Wildcards
-SELECT (revisited)
-The SELECT statement is the most frequently used SQL command.
-Example:
-SELECT title, publication_year FROM Books;
-
-WHERE Clause
-Used to filter records based on specified conditions. Only rows that satisfy the WHERE condition are returned.
-Syntax:
+`WHERE` **Clause** : Used to filter records based on specified conditions. Only rows that satisfy the WHERE condition are returned.
+```sql
 SELECT column1, column2 FROM table_name
 WHERE condition;
+```
 
-Example:
+**Example**:
+```sql
 SELECT title, price
 FROM Books
 WHERE price > 15.00;
@@ -292,16 +270,19 @@ WHERE price > 15.00;
 SELECT *
 FROM Authors
 WHERE last_name = 'King';
+```
 
-LIKE Operator and Wildcards
-Used for pattern matching in string columns.
- * % (percent sign): Represents zero, one, or multiple characters.
- * _ (underscore): Represents a single character.
-Syntax:
+`LIKE` **Operator** and **Wildcards** : Used for pattern matching in string columns.
+ * `%` (percent sign): Represents zero, one, or multiple characters.
+ * `_` (underscore): Represents a single character.
+
+```sql
 SELECT column1 FROM table_name
 WHERE column_name LIKE pattern;
+```
 
-Example:
+**Example**:
+```sql
 -- Find books where the title starts with 'The'
 SELECT title FROM Books
 WHERE title LIKE 'The%';
@@ -313,15 +294,18 @@ WHERE first_name LIKE '_o%';
 -- Find titles containing 'Potter'
 SELECT title FROM Books
 WHERE title LIKE '%Potter%';
+```
 
-Updating Data with UPDATE
-Used to modify existing records in a table. Always use a WHERE clause with UPDATE to avoid updating all rows!
-Syntax:
+### Updating Data with `UPDATE`
+Used to modify existing records in a table. Always use a `WHERE` clause with `UPDATE` to avoid updating all rows!
+```sql
 UPDATE table_name
 SET column1 = new_value1, column2 = new_value2, ...
 WHERE condition;
+```
 
-Example:
+**Example**:
+```sql
 -- Update the price of 'The Shining'
 UPDATE Books
 SET price = 16.50
@@ -331,14 +315,17 @@ WHERE title = 'The Shining';
 UPDATE Books
 SET stock_quantity = 5
 WHERE publication_year < 1990;
+```
 
-Deleting Rows with DELETE
-Used to remove existing records from a table. Always use a WHERE clause with DELETE to avoid deleting all rows!
-Syntax:
+### Deleting Rows with `DELETE`
+Used to remove existing records from a table. Always use a `WHERE` clause with `DELETE` to avoid deleting all rows!
+```sql
 DELETE FROM table_name
 WHERE condition;
+```
 
-Example:
+**Example**:
+```sql
 -- Delete a specific book
 DELETE FROM Books
 WHERE title = 'Old Unpopular Book';
@@ -346,47 +333,55 @@ WHERE title = 'Old Unpopular Book';
 -- Delete authors born before 1900
 DELETE FROM Authors
 WHERE birth_date < '1900-01-01';
+```
 
-TRUNCATE TABLE vs DELETE FROM table_name (without WHERE)
- * DELETE FROM table_name;: Deletes all rows, but logs each row deletion. Can be rolled back (if part of a transaction). Resets AUTO_INCREMENT in some RDBMS (e.g., MySQL), but not universally.
- * TRUNCATE TABLE table_name;: Faster for deleting all rows. It's a DDL (Data Definition Language) command, not DML. It typically deallocates the data pages used by the table, effectively resetting the table. Usually not logged per row, making it faster. Resets AUTO_INCREMENT. Cannot be rolled back.
-When to use which:
- * DELETE for selective row deletion or when you need the ability to rollback.
- * TRUNCATE for quickly emptying an entire table when you don't need to rollback.
-Using Aliases, Filtering with Comparison Operators
-Table Aliases
-Used to give a temporary name to a table in a query. Useful in joins (discussed later) or when referring to the same table multiple times.
-Syntax:
+### `TRUNCATE TABLE` vs `DELETE FROM table_name` (without `WHERE`)
+ * `DELETE FROM table_name;` : Deletes all rows, but logs each row deletion. Can be rolled back (if part of a transaction). Resets AUTO_INCREMENT in some RDBMS (e.g., MySQL), but not universally.
+ * `TRUNCATE TABLE table_name;` : Faster for deleting all rows. It's a DDL (Data Definition Language) command, not DML. It typically deallocates the data pages used by the table, effectively resetting the table. Usually not logged per row, making it faster. Resets AUTO_INCREMENT. Cannot be rolled back.
+
+#### When to use which:
+ * `DELETE` for selective row deletion or when you need the ability to rollback.
+ * `TRUNCATE` for quickly emptying an entire table when you don't need to rollback.
+
+### Using Aliases, Filtering with Comparison Operators
+**Table Aliases** : Used to give a temporary name to a table in a query. Useful in joins (discussed later) or when referring to the same table multiple times.
+```sql
 SELECT T.column1
 FROM table_name AS T
 WHERE T.column2 = 'value';
+```
 
-Example:
+**Example**:
+```sql
 SELECT b.title, b.price
 FROM Books AS b
 WHERE b.price < 15.00;
+```
 
-Comparison Operators
-Used in WHERE clauses to compare values.
- * = : Equal to
- * != or <> : Not equal to
- * > : Greater than
- * < : Less than
- * >= : Greater than or equal to
- * <= : Less than or equal to
-Example:
+### Comparison Operators
+Used in `WHERE` clauses to compare values.
+- = : Equal to
+- != or <> : Not equal to
+- \> Greater than
+- < : Less than
+- \>= : Greater than or equal to
+- <= : Less than or equal to
+
+```sql
 SELECT * FROM Books WHERE publication_year >= 2000;
 SELECT * FROM Authors WHERE birth_date < '1950-01-01';
+```
 
-Logical Operators (AND, OR, NOT, IN, BETWEEN, IS NULL)
+### Logical Operators (`AND`, `OR`, `NOT`, `IN`, `BETWEEN`, `IS NULL`)
 Used to combine or negate conditions in a WHERE clause.
- * AND: Both conditions must be true.
- * OR: At least one condition must be true.
- * NOT: Negates a condition.
- * IN (value1, value2, ...): Checks if a value matches any value in a list.
- * BETWEEN value1 AND value2: Checks if a value is within a range (inclusive).
- * IS NULL / IS NOT NULL: Checks for NULL values. You cannot use = or != with NULL!
-Example:
+ * `AND`: Both conditions must be true.
+ * `OR`: At least one condition must be true.
+ * `NOT`: Negates a condition.
+ * `IN (value1, value2, ...)`: Checks if a value matches any value in a list.
+ * `BETWEEN value1 AND value2`: Checks if a value is within a range (inclusive).
+ * `IS NULL` / `IS NOT NULL`: Checks for NULL values. You cannot use = or != with NULL!
+
+```sql
 -- Books published after 2000 AND priced less than 20
 SELECT title, price, publication_year
 FROM Books
@@ -409,18 +404,21 @@ WHERE stock_quantity IS NULL;
 -- Books that are NOT published in the 2000s
 SELECT title FROM Books
 WHERE NOT (publication_year BETWEEN 2000 AND 2009);
+```
 
-Using CASE Expressions for Conditional Logic
-The CASE expression allows you to implement IF-THEN-ELSE logic directly within your SQL queries. It's often used in SELECT statements to create new columns based on conditions or in ORDER BY clauses for custom sorting.
-Syntax:
+### Using CASE Expressions for Conditional Logic
+The `CASE` expression allows you to implement `IF-THEN-ELSE` logic directly within your SQL queries. It's often used in `SELECT` statements to create new columns based on conditions or in `ORDER BY` clauses for custom sorting.
+```sql
 CASE
     WHEN condition1 THEN result1
     WHEN condition2 THEN result2
     ...
     ELSE resultN
 END AS new_column_name
+```
 
-Example:
+**Example**:
+```sql
 SELECT
     title,
     price,
@@ -441,8 +439,11 @@ ORDER BY
         ELSE 3
     END,
     title; -- Secondary sort by title within category
+```
 
-🔤 4. String Functions
+---
+
+## String Functions
 String functions are essential for manipulating text data within your queries. Syntax can vary slightly between RDBMS.
 CONCAT, SUBSTRING, REPLACE, REVERSE
  * CONCAT(string1, string2, ...): Joins two or more strings.
